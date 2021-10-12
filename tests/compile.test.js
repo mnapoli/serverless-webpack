@@ -117,7 +117,7 @@ describe('compile', () => {
   });
 
   it('should work with concurrent compile', () => {
-    const testWebpackConfig = [ 'testconfig', 'testconfig2' ];
+    const testWebpackConfig = ['testconfig', 'testconfig2'];
     const multiStats = {
       stats: [
         {
@@ -174,7 +174,7 @@ describe('compile', () => {
       })
       .then(() => {
         expect(webpackMock).to.have.been.calledWith(testWebpackConfig);
-        expect(mockStats.toString.args).to.eql([ [testWebpackConfig.stats], [testWebpackConfig.stats] ]);
+        expect(mockStats.toString.args).to.eql([[testWebpackConfig.stats], [testWebpackConfig.stats]]);
         return null;
       });
   });

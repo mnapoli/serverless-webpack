@@ -181,7 +181,7 @@ describe('validate', () => {
     });
 
     it('should set a default `webpackConfig.output.filename` if `entry` is an array', () => {
-      const testEntry = [ 'first', 'second', 'last' ];
+      const testEntry = ['first', 'second', 'last'];
       const testConfig = {
         entry: testEntry
       };
@@ -1037,7 +1037,7 @@ describe('validate', () => {
         _.set(module.serverless.service, 'custom.webpack.config', testConfig);
         module.serverless.service.functions = testFunctionsConfig;
         module.options.function = testFunction;
-        globSyncStub.returns([ 'module1.ts', 'module1.js' ]);
+        globSyncStub.returns(['module1.ts', 'module1.js']);
         return expect(module.validate()).to.be.fulfilled.then(() => {
           const lib = require('../lib/index');
           const expectedLibEntries = {
@@ -1067,7 +1067,7 @@ describe('validate', () => {
         _.set(module.serverless.service, 'custom.webpack.config', testConfig);
         module.serverless.service.functions = testFunctionsConfig;
         module.options.function = testFunction;
-        globSyncStub.returns([ 'module1.doc', 'module1.json', 'module1.test.js', 'module1.ts', 'module1.js' ]);
+        globSyncStub.returns(['module1.doc', 'module1.json', 'module1.test.js', 'module1.ts', 'module1.js']);
         return expect(module.validate()).to.be.fulfilled.then(() => {
           const lib = require('../lib/index');
           const expectedLibEntries = {
