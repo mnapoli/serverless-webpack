@@ -8,6 +8,7 @@ const compile = require('./lib/compile');
 const wpwatch = require('./lib/wpwatch');
 const cleanup = require('./lib/cleanup');
 const run = require('./lib/run');
+const { progress } = require('./lib/log');
 const prepareLocalInvoke = require('./lib/prepareLocalInvoke');
 const runPluginSupport = require('./lib/runPluginSupport');
 const prepareOfflineInvoke = require('./lib/prepareOfflineInvoke');
@@ -84,7 +85,7 @@ class ServerlessWebpack {
           },
           package: {
             type: 'entrypoint',
-            lifecycleEvents: ['packExternalModules', 'packageModules', 'copyExistingArtifacts']
+            lifecycleEvents: [ 'packExternalModules', 'packageModules', 'copyExistingArtifacts' ]
           }
         }
       }
@@ -101,7 +102,8 @@ class ServerlessWebpack {
         BbPromise.bind(this)
           .then(() => this.serverless.pluginManager.spawn('webpack:validate'))
           .then(() => (this.skipCompile ? BbPromise.resolve() : this.serverless.pluginManager.spawn('webpack:compile')))
-          .then(() => this.serverless.pluginManager.spawn('webpack:package')),
+          .then(() => this.serverless.pluginManager.spawn('webpack:package'))
+          .then(() => progress.get('webpack').remove()),
 
       'after:package:createDeploymentArtifacts': () => BbPromise.bind(this).then(this.cleanup),
 
